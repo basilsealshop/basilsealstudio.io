@@ -254,14 +254,17 @@ function createSlides() {
 createSlides();
 
 // SCORRIMENTO CON FRECCE
+let currentOffset = 0;
 const scrollAmount = 250;
 
 rightBtn.addEventListener("click", () => {
-  slider.scrollLeft += scrollAmount;
+  currentOffset -= scrollAmount;
+  track.style.transform = `translateX(${currentOffset}px)`;
 });
 
 leftBtn.addEventListener("click", () => {
-  slider.scrollLeft -= scrollAmount;
+  currentOffset += scrollAmount;
+  track.style.transform = `translateX(${currentOffset}px)`;
 });
 </script>
 </html>
