@@ -232,17 +232,11 @@ createSlides();
 const scrollAmount = 250;
 
 rightBtn.addEventListener("click", () => {
- const scrollAmount = 250;
-
-rightBtn.addEventListener("click", () => {
   slider.scrollLeft += scrollAmount;
 });
 
 leftBtn.addEventListener("click", () => {
   slider.scrollLeft -= scrollAmount;
-});
-leftBtn.addEventListener("click", () => {
-  slider.scrollBy({ left: -scrollAmount, behavior: "smooth" });
 });
 </script>
 </html>
