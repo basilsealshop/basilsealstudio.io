@@ -50,9 +50,10 @@
       padding: 20px 0;
     }
 
-    .slide-track {
-      display: inline-flex;
-      animation: scroll 20s linear infinite;
+   .slide-track {
+  display: flex;
+  width: max-content;
+  animation: scroll 25s linear infinite;
     }
 
     .slide-track img {
@@ -105,9 +106,8 @@
 <!-- HOME -->
 <section id="home">
   <h2>Sticker Gallery</h2>
-  <div class="slideshow">
-    <div class="slide-track" id="slideTrack">
-      <!-- DUPLICA IMMAGINI PER LOOP -->
+<div class="slideshow">
+  <div class="slide-track" id="slideTrack"></div>
       <img src="DUNGEON MONSTERS_01.png">
       <img src="DUNGEON MONSTERS_02.png">
       <img src="DUNGEON MONSTERS_03.png">
@@ -168,5 +168,51 @@
   © 2026 Basil Seal Studio
 </footer>
 
+  <script>
+const images = [
+  "DUNGEON MONSTERS_01.png",
+  "DUNGEON MONSTERS_02.png",
+  "DUNGEON MONSTERS_03.png",
+  "DUNGEON MONSTERS_04.png",
+  "DUNGEON MONSTERS_05-01.png",
+  "DUNGEON MONSTERS_06.png",
+  "DUNGEON MONSTERS_07.png",
+  "MYTHO'S-01.png",
+  "MYTHO'S-02.png",
+  "MYTHO'S-03.png",
+  "MYTHO'S-04.png",
+  "MYTHO'S-05.png",
+  "MYTHO'S-06.png",
+  "MYTHO'S-07.png",
+  "MYTHO'S-08.png"
+];
+
+const track = document.getElementById("slideTrack");
+
+function shuffle(array) {
+  return array.sort(() => Math.random() - 0.5);
+}
+
+function createSlides() {
+  track.innerHTML = "";
+  
+  const shuffled = shuffle([...images]);
+
+  const fullList = [...shuffled, ...shuffled];
+
+  fullList.forEach(src => {
+    const img = document.createElement("img");
+    img.src = src;
+    track.appendChild(img);
+  });
+}
+
+track.addEventListener("animationiteration", () => {
+  createSlides();
+});
+
+createSlides();
+</script>
+  
 </body>
 </html>
