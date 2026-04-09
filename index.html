@@ -258,55 +258,5 @@ slider.addEventListener("touchend", () => {
   © 2026 Basil Seal Studio
 </footer>
 
-<!-- SCRIPT SLIDESHOW -->
-<script>
-const images = [
-  "DUNGEON MONSTERS_01.png",
-  "DUNGEON MONSTERS_02.png",
-  "DUNGEON MONSTERS_03.png",
-  "DUNGEON MONSTERS_04.png",
-  "DUNGEON MONSTERS_05-01.png",
-  "DUNGEON MONSTERS_06.png",
-  "DUNGEON MONSTERS_07.png",
-  "MYTHO'S-01.png",
-  "MYTHO'S-02.png",
-  "MYTHO'S-03.png",
-  "MYTHO'S-04.png",
-  "MYTHO'S-05.png",
-  "MYTHO'S-06.png",
-  "MYTHO'S-07.png",
-  "MYTHO'S-08.png"
-];
-
-const track = document.getElementById("slideTrack");
-
-function shuffle(array) {
-  return array.sort(() => Math.random() - 0.5);
-}
-
-function createSlides() {
-  track.innerHTML = "";
-
-  const shuffled = shuffle([...images]);
-
-  // doppio array per loop fluido
-  const fullList = [...shuffled, ...shuffled];
-
-  fullList.forEach(src => {
-    const img = document.createElement("img");
-    img.src = src;
-    track.appendChild(img);
-  });
-}
-
-// inizializza
-createSlides();
-
-// reshuffle ogni ciclo (33 secondi)
-setInterval(() => {
-  createSlides();
-}, 33000);
-</script>
-
 </body>
 </html>
