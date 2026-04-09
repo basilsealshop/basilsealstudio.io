@@ -44,32 +44,57 @@
     }
 
     /* SLIDESHOW */
-   .slideshow {
+ .slideshow {
+  position: relative;
   overflow: hidden;
   background: #f6a017;
-  padding: 20px 0;
+  padding: 30px 0;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
-  cursor: grab;
 }
 
-    .slide-track {
+.slide-track {
   display: flex;
-  gap: 20px;
+  gap: 20px; /* spazio invariato */
+  align-items: center;
 }
 
-    .slide-track img {
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      margin: 0 10px;
-      border-radius: 0;
-    }
+.slide-track img {
+  width: 195px;   /* +30% (prima 150px) */
+  height: 195px;
+  object-fit: cover;
+  border-radius: 0;
+}
 
-    @keyframes scroll {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
+/* FRECCE */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  opacity: 0.8;
+}
+
+.arrow img {
+  width: 40px;
+  height: 40px;
+  filter: brightness(0) invert(1); /* rende le frecce bianche */
+}
+
+.arrow:hover {
+  opacity: 1;
+}
+
+.left {
+  left: 10px;
+}
+
+.right {
+  right: 10px;
+}
 
     /* GRID */
     .grid {
@@ -111,9 +136,20 @@
   <h2>Sticker Gallery</h2>
 
   <div class="slideshow" id="slider">
+  
+  <!-- FRECCIA SINISTRA -->
+  <button class="arrow left" id="leftBtn">
+    <img src="left-arrow.png">
+  </button>
+
   <div class="slide-track" id="slideTrack"></div>
+
+  <!-- FRECCIA DESTRA -->
+  <button class="arrow right" id="rightBtn">
+    <img src="right-arrow.png">
+  </button>
+
 </div>
-</section>
 
 <!-- STICKER SET -->
 <section id="sets">
@@ -192,12 +228,15 @@ const images = [
 const track = document.getElementById("slideTrack");
 const slider = document.getElementById("slider");
 
-// shuffle immagini
+const leftBtn = document.getElementById("leftBtn");
+const rightBtn = document.getElementById("rightBtn");
+
+// shuffle
 function shuffle(array) {
   return array.sort(() => Math.random() - 0.5);
 }
 
-// crea slider random
+// crea immagini
 function createSlides() {
   track.innerHTML = "";
   const shuffled = shuffle([...images]);
@@ -211,53 +250,23 @@ function createSlides() {
 
 createSlides();
 
-// DRAG SCROLL
-let isDown = false;
-let startX;
-let scrollLeft;
+// SCORRIMENTO CON FRECCE
+const scrollAmount = 250;
 
-slider.addEventListener("mousedown", (e) => {
-  isDown = true;
-  slider.style.cursor = "grabbing";
-  startX = e.pageX - slider.offsetLeft;
-  scrollLeft = slider.scrollLeft;
+rightBtn.addEventListener("click", () => {
+  slider.scrollBy({ left: scrollAmount, behavior: "smooth" });
 });
 
-slider.addEventListener("mouseleave", () => {
-  isDown = false;
-  slider.style.cursor = "grab";
+leftBtn.addEventListener("click", () => {
+  slider.scrollBy({ left: -scrollAmount, behavior: "smooth" });
 });
 
-slider.addEventListener("mouseup", () => {
-  isDown = false;
-  slider.style.cursor = "grab";
-
-  // reshuffle quando rilasci
-  createSlides();
-});
-
-slider.addEventListener("mousemove", (e) => {
-  if (!isDown) return;
-  e.preventDefault();
-  const x = e.pageX - slider.offsetLeft;
-  const walk = (x - startX) * 1.5;
-  slider.scrollLeft = scrollLeft - walk;
-});
-
-// SUPPORTO TOUCH (mobile)
-slider.addEventListener("touchstart", (e) => {
-  startX = e.touches[0].pageX;
-  scrollLeft = slider.scrollLeft;
-});
-
-slider.addEventListener("touchmove", (e) => {
-  const x = e.touches[0].pageX;
-  const walk = (x - startX) * 1.5;
-  slider.scrollLeft = scrollLeft - walk;
-});
-
-slider.addEventListener("touchend", () => {
-  createSlides();
+// reshuffle quando arrivi quasi alla fine
+slider.addEventListener("scroll", () => {
+  if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 50) {
+    createSlides();
+    slider.scrollLeft = 0;
+  }
 });
 </script>
 </html>
