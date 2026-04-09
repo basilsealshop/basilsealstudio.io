@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Basil Seal Studio</title>
+
   <style>
     body {
       margin: 0;
@@ -50,10 +51,10 @@
       padding: 20px 0;
     }
 
-   .slide-track {
-  display: flex;
-  width: max-content;
-  animation: scroll 25s linear infinite;
+    .slide-track {
+      display: flex;
+      width: max-content;
+      animation: scroll 33s linear infinite; /* più lento */
     }
 
     .slide-track img {
@@ -90,6 +91,7 @@
     }
   </style>
 </head>
+
 <body>
 
 <header>
@@ -106,24 +108,9 @@
 <!-- HOME -->
 <section id="home">
   <h2>Sticker Gallery</h2>
-<div class="slideshow">
-  <div class="slide-track" id="slideTrack"></div>
-      <img src="DUNGEON MONSTERS_01.png">
-      <img src="DUNGEON MONSTERS_02.png">
-      <img src="DUNGEON MONSTERS_03.png">
-      <img src="DUNGEON MONSTERS_04.png">
-      <img src="DUNGEON MONSTERS_05-01.png">
-      <img src="DUNGEON MONSTERS_06.png">
-      <img src="DUNGEON MONSTERS_07.png">
-      <img src="MYTHO'S-01.png">
-      <img src="MYTHO'S-02.png">
-      <img src="MYTHO'S-03.png">
-      <img src="MYTHO'S-04.png">
-      <img src="MYTHO'S-05.png">
-      <img src="MYTHO'S-06.png">
-      <img src="MYTHO'S-07.png">
-      <img src="MYTHO'S-08.png">
-    </div>
+
+  <div class="slideshow">
+    <div class="slide-track" id="slideTrack"></div>
   </div>
 </section>
 
@@ -168,7 +155,8 @@
   © 2026 Basil Seal Studio
 </footer>
 
-  <script>
+<!-- SCRIPT SLIDESHOW -->
+<script>
 const images = [
   "DUNGEON MONSTERS_01.png",
   "DUNGEON MONSTERS_02.png",
@@ -195,9 +183,10 @@ function shuffle(array) {
 
 function createSlides() {
   track.innerHTML = "";
-  
+
   const shuffled = shuffle([...images]);
 
+  // doppio array per loop fluido
   const fullList = [...shuffled, ...shuffled];
 
   fullList.forEach(src => {
@@ -207,12 +196,14 @@ function createSlides() {
   });
 }
 
-track.addEventListener("animationiteration", () => {
-  createSlides();
-});
-
+// inizializza
 createSlides();
+
+// reshuffle ogni ciclo (33 secondi)
+setInterval(() => {
+  createSlides();
+}, 33000);
 </script>
-  
+
 </body>
 </html>
