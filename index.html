@@ -46,12 +46,15 @@
     /* SLIDESHOW */
 .slideshow {
   position: relative;
-  overflow-x: hidden; /* 👈 scroll qui */
+  overflow-x: auto; /* 👈 scroll qui */
   overflow-y: hidden;
   background: #f6a017;
   padding: 30px 0;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
+}
+.slideshow::-webkit-scrollbar {
+  display: none;
 }
 
 /* IMPORTANTISSIMO */
@@ -79,6 +82,21 @@
   border: none;
   cursor: pointer;
   padding: 10px;
+}
+
+.left {
+  left: 10px;
+}
+
+.right {
+  right: 10px;
+}
+
+/* dimensione + colore */
+.arrow img {
+  width: 40px;
+  height: 40px;
+  filter: brightness(0) invert(1); /* bianco */
 }
 
     /* GRID */
