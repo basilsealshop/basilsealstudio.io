@@ -44,56 +44,34 @@
     }
 
     /* SLIDESHOW */
- .slideshow {
+.slideshow {
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden; /* 👈 scroll qui */
+  overflow-y: hidden;
   background: #f6a017;
   padding: 30px 0;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
 }
 
+/* IMPORTANTISSIMO */
 .slide-track {
   display: flex;
-  gap: 20px; /* spazio invariato */
+  gap: 20px;
   align-items: center;
+  pointer-events: none; /* evita interferenze */
 }
 
-.slide-track img {
-  width: 195px;   /* +30% (prima 150px) */
-  height: 195px;
-  object-fit: cover;
-  border-radius: 0;
-}
-
-/* FRECCE */
+/* FRECCE SEMPRE SOPRA */
 .arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  z-index: 10; /* 👈 le tiene fisse sopra */
   background: none;
   border: none;
   cursor: pointer;
   padding: 10px;
-  opacity: 0.8;
-}
-
-.arrow img {
-  width: 40px;
-  height: 40px;
-  filter: brightness(0) invert(1); /* rende le frecce bianche */
-}
-
-.arrow:hover {
-  opacity: 1;
-}
-
-.left {
-  left: 10px;
-}
-
-.right {
-  right: 10px;
 }
 
     /* GRID */
@@ -254,19 +232,17 @@ createSlides();
 const scrollAmount = 250;
 
 rightBtn.addEventListener("click", () => {
-  slider.scrollBy({ left: scrollAmount, behavior: "smooth" });
+ const scrollAmount = 250;
+
+rightBtn.addEventListener("click", () => {
+  slider.scrollLeft += scrollAmount;
 });
 
 leftBtn.addEventListener("click", () => {
-  slider.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+  slider.scrollLeft -= scrollAmount;
 });
-
-// reshuffle quando arrivi quasi alla fine
-slider.addEventListener("scroll", () => {
-  if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 50) {
-    createSlides();
-    slider.scrollLeft = 0;
-  }
+leftBtn.addEventListener("click", () => {
+  slider.scrollBy({ left: -scrollAmount, behavior: "smooth" });
 });
 </script>
 </html>
