@@ -1,48 +1,172 @@
-<script>
-const images = [
-  "DUNGEON MONSTERS_01.png",
-  "DUNGEON MONSTERS_02.png",
-  "DUNGEON MONSTERS_03.png",
-  "DUNGEON MONSTERS_04.png",
-  "DUNGEON MONSTERS_05-01.png",
-  "DUNGEON MONSTERS_06.png",
-  "DUNGEON MONSTERS_07.png",
-  "MYTHO'S-01.png",
-  "MYTHO'S-02.png",
-  "MYTHO'S-03.png",
-  "MYTHO'S-04.png",
-  "MYTHO'S-05.png",
-  "MYTHO'S-06.png",
-  "MYTHO'S-07.png",
-  "MYTHO'S-08.png"
-];
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basil Seal Studio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+    }
 
-const track = document.getElementById("slideTrack");
+    header {
+      background: #111;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+    }
 
-function shuffle(array) {
-  return array.sort(() => Math.random() - 0.5);
-}
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      background: #222;
+      padding: 10px;
+    }
 
-function createSlides() {
-  track.innerHTML = "";
-  
-  const shuffled = shuffle([...images]);
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-  // Crea 2 copie per loop fluido
-  const fullList = [...shuffled, ...shuffled];
+    section {
+      padding: 40px 20px;
+    }
 
-  fullList.forEach(src => {
-    const img = document.createElement("img");
-    img.src = src;
-    track.appendChild(img);
-  });
-}
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
 
-// Quando finisce l'animazione → reshuffle
-track.addEventListener("animationiteration", () => {
-  createSlides();
-});
+    /* SLIDESHOW */
+    .slideshow {
+      overflow: hidden;
+      white-space: nowrap;
+      background: #fff;
+      padding: 20px 0;
+    }
 
-// inizializza
-createSlides();
-</script>
+    .slide-track {
+      display: inline-flex;
+      animation: scroll 20s linear infinite;
+    }
+
+    .slide-track img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      margin: 0 10px;
+      border-radius: 10px;
+    }
+
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+    }
+
+    .grid img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  Basil Seal Studio
+</header>
+
+<nav>
+  <a href="#home">Home</a>
+  <a href="#sets">Sticker Set</a>
+  <a href="#collector">Collector's Page</a>
+  <a href="#contact">Contatti</a>
+</nav>
+
+<!-- HOME -->
+<section id="home">
+  <h2>Sticker Gallery</h2>
+  <div class="slideshow">
+    <div class="slide-track" id="slideTrack">
+      <!-- DUPLICA IMMAGINI PER LOOP -->
+      <img src="DUNGEON MONSTERS_01.png">
+      <img src="DUNGEON MONSTERS_02.png">
+      <img src="DUNGEON MONSTERS_03.png">
+      <img src="DUNGEON MONSTERS_04.png">
+      <img src="DUNGEON MONSTERS_05-01.png">
+      <img src="DUNGEON MONSTERS_06.png">
+      <img src="DUNGEON MONSTERS_07.png">
+      <img src="MYTHO'S-01.png">
+      <img src="MYTHO'S-02.png">
+      <img src="MYTHO'S-03.png">
+      <img src="MYTHO'S-04.png">
+      <img src="MYTHO'S-05.png">
+      <img src="MYTHO'S-06.png">
+      <img src="MYTHO'S-07.png">
+      <img src="MYTHO'S-08.png">
+    </div>
+  </div>
+</section>
+
+<!-- STICKER SET -->
+<section id="sets">
+  <h2>Sticker Set</h2>
+
+  <h3>Set 1</h3>
+  <div class="grid">
+    <img src="images/set1/sticker1.png">
+    <img src="images/set1/sticker2.png">
+    <img src="images/set1/sticker3.png">
+  </div>
+
+  <h3>Set 2</h3>
+  <div class="grid">
+    <img src="images/set2/sticker1.png">
+    <img src="images/set2/sticker2.png">
+    <img src="images/set2/sticker3.png">
+  </div>
+</section>
+
+<!-- COLLECTOR PAGE -->
+<section id="collector">
+  <h2>Collector's Page</h2>
+  <div class="grid">
+    <img src="images/collector/art1.png">
+    <img src="images/collector/art2.png">
+    <img src="images/collector/art3.png">
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2>Contatti</h2>
+  <p>Email: basilsealstudio@email.com</p>
+  <p>Instagram: <a href="#">@basilsealstudio</a></p>
+  <p>Twitter: <a href="#">@basilsealstudio</a></p>
+</section>
+
+<footer>
+  © 2026 Basil Seal Studio
+</footer>
+
+</body>
+</html>
